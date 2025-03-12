@@ -57,7 +57,7 @@ module.exports.updateDetails = async (req, res, next) => {
         const data = await User.findOneAndUpdate(
             { email: email },
             { $set: { name: name, email: email,role:role }, },
-            { upsert: true, new: true }
+            { upsert: true,}
         )
         if (data) {
             res.status(200).json({ message: `${data.role} data Updated Successfully`, data });
