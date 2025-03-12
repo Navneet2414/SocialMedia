@@ -52,10 +52,11 @@ module.exports.getAllList = async (req, res, next) => {
 
 module.exports.updateDetails = async (req, res, next) => {
     try {
-        const { email, name, } = req.body;
+        const { email, name, role} = req.body;
+
         const data = await User.findOneAndUpdate(
             { email: email },
-            { $set: { name: name, email: email }, },
+            { $set: { name: name, email: email,role:role }, },
             { upsert: true, new: true }
         )
         if (data) {
