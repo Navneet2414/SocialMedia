@@ -52,11 +52,13 @@ module.exports.getAllList = async (req, res, next) => {
 
 module.exports.updateDetails = async (req, res, next) => {
     try {
-        const { email, name, } = req.body;
+        const { email, name, role,_id} = req.body;
+
         const data = await User.findOneAndUpdate(
-            { email: email },
-            { $set: { name: name, email: email }, },
-            { upsert: true, new: true }
+            // { email: email },
+            {_id:_id},
+            { $set: { name: name, email: email,role:role ,}, },
+            { upsert: true,new:true}
         )
         if (data) {
             res.status(200).json({ message: `${data.role} data Updated Successfully`, data });
@@ -64,6 +66,7 @@ module.exports.updateDetails = async (req, res, next) => {
             res.status(403).json({ message: "User Not Found" });
         }
     } catch (error) {
-        res.status(500).json({ message: "internal server Error", error })
+        console.log("error",error)
+        res.status(500).json({ message: "internal server Error", error });
     }
 }
