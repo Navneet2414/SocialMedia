@@ -41,6 +41,8 @@ module.exports.adminLogin = async (req, res) => {
             }
 
         }
+        
+        
         if (!verifypassword) {
             console.log(data.count, "======== ccc")
             const count = await User.findOneAndUpdate(
@@ -93,6 +95,7 @@ module.exports.adminLogin = async (req, res) => {
                     token: token,
                     count: 0,
                     isBlocked: false,
+                    
 
                 }
             },
@@ -224,5 +227,24 @@ module.exports.uploadSingleImage = async (req, res) => {
     } catch (error) {
         console.log("errror", error);
         res.status(500).json({ message: "Internal Server Error", error })
+    }
+}
+module.exports.logout = async(req,res,next)=>{
+    const {email,password} = req.body;
+    try{
+    const data = await User.findOneAndUpdate(
+        {email:email,},
+       { $unset:{token:""},$set:{status:"InActive"}},
+
+       {new:true}
+    
+    )   
+    if(!data){
+        res.status(403).json({message:"Record not found"})
+    }     
+    res.status(200).json({message:`${data.role} Logout successfully`})
+    }catch(error){
+        res.status(500).json({message:"Internal Server error",error})
+
     }
 }

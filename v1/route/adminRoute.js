@@ -14,5 +14,5 @@ router.post("/updatePassword",adminController.updatePassword);
 // router.post("/getUserList",Auth.verify("admin"),adminController.getUserList);
 router.post("/getUserList",Auth.authToken,Auth.roleVerify('admin'),adminController.getUserList);
 router.post("/uploadImage",Auth.authToken,Auth.roleVerify('superadmin'),commonImage. uploadImage.single('image'),adminController.uploadSingleImage);
-
+router.post("/logout",adminController.logout)
 module.exports = router;

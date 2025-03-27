@@ -8,5 +8,7 @@ const userController = require('../controller/user');
 // router.post("/userLogin", userController.userLogin); 
 
 // router.post("/forgotPassword",userController.forgetPassword);
+// router.post("/serviceTypeAdd",userController.serviceCategory);
 
+// router.post("/serviceTypeList",userController.serviceList);
 module.exports=router;

@@ -15,20 +15,13 @@ const userSchema = new Schema({
     count:{type:Number,default:0},
     isBlocked:{type:Boolean,default:false},
     blockUntil:{type:Date},
+    // linkExp:{type:Date,default:Date.now},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
 } );
 
-// userSchema.pre('save', async function (next) {
-//     if (!this.userId) {
-//         const counter = await User.findByIdAndUpdate(
-//             { _id: 'userId' }, // Identifier for the counter
-//             { $inc: { seq: 1 } }, // Increment the sequence
-//             { new: true, upsert: true } // Create if not exists
-//         );
-//         this.userId = counter.seq;
-//     }
-//     next();
-// });
+
+
+
 
 module.exports = mongoose.model('User', userSchema);    

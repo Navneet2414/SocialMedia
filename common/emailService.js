@@ -23,7 +23,7 @@ exports.emailService = async function (payload) {
     };
 
     try {
-        console.log("Email is sent ", mailOptions);
+        // console.log("Email is sent ", mailOptions);
         return await transporter.sendMail(mailOptions); 
     } catch (err) {
         console.error('Failed to send email:', err);

@@ -17,7 +17,7 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use("/api/admin",adminroute);
 // app.use("/api/user",userRoute);

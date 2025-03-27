@@ -5,6 +5,8 @@ const router = express.Router();
 
 const commonFunction = require("../../common/commonFunction");
 const emailService = require("../../common/emailService");
+const serviceTypeModel = require("../model/serviceTypeModel");
+
 
 
 const User = require('../model/userModel');
@@ -38,6 +40,45 @@ module.exports.userRegister = async (req, res, next) => {
     }
 
 }
+
+
+module.exports.serviceCategory = async (req, res, next) => {
+   const {userId,service,description,name} = req.body;
+    try {
+       const data = await serviceTypeModel.create({
+        userId:userId,
+        service:service,
+        description:description,
+        name:name
+
+       })
+       if(!data){
+         res.status(400).json({message:"Service not created"});
+       }
+       res.status(200).json({message:"Service created successfully",data});
+    } catch (error) {
+        console.log("error", error);
+        res.status(500).json({ message: "Internal Server Error", error });
+    }
+}
+
+// module.exports.serviceList = async (req, res, next) => {
+//     try {
+//         const data = await serviceTypeModel.findOne({userId:req.body.userId})
+//         .populate(
+//           "userId" ,
+//            "name",
+//       ).exec();
+//         if(!data){
+//            return res.status(400).json({message:"Service not found"});
+//         }
+//          return res.status(200).json({message:"Service found successfully",data});
+        
+//     } catch (error) {
+//         console.log("error", error);
+//         res.status(500).json({ message: "Internal Server Error", error });
+//     } 
+// }
 
 
 // module.exports.userLogin = async (req, res) => {
@@ -141,6 +182,8 @@ module.exports.userRegister = async (req, res, next) => {
 //         res.status(500).json({ message: "Internal Server Error", error })
 //     }
 // }
+
+
 
 
 
